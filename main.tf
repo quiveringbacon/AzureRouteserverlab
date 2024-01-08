@@ -344,7 +344,7 @@ resource "azurerm_subnet_route_table_association" "onpremdefaultsubnet" {
   timeouts {
     create = "2h"
     read = "2h"
-    update = "2h"
+    #update = "2h"
     delete = "2h"
   }
 }
