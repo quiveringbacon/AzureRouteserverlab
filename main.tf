@@ -737,9 +737,15 @@ resource "azurerm_route_server" "RS1" {
   public_ip_address_id             = azurerm_public_ip.routeserver-pip.id
   subnet_id                        = azurerm_virtual_network.hub-vnet.subnet.*.id[4]
   branch_to_branch_traffic_enabled = true
-  provisioner "local-exec" {
-    command = "az network routeserver peering create --name toasav --peer-ip 10.0.3.4 --peer-asn 65001 --routeserver routeserver1 --resource-group ${azurerm_resource_group.RG.name}"
-  }
+  #provisioner "local-exec" {
+  #  command = "az network routeserver peering create --name toasav --peer-ip 10.0.3.4 --peer-asn 65001 --routeserver routeserver1 --resource-group ${azurerm_resource_group.RG.name}"
+  #}
+}
+resource "azurerm_route_server_bgp_connection" "bgpcon1" {
+  name            = "ToASAv"
+  route_server_id = azurerm_route_server.RS1.id
+  peer_asn        = 65001
+  peer_ip         = "10.0.3.4"
 }
 
 
