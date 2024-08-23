@@ -195,26 +195,26 @@ resource "azurerm_virtual_network" "hub-vnet" {
   name                = "AZ-hub-vnet"
   resource_group_name = azurerm_resource_group.RG.name
   subnet {
-    address_prefix     = "10.0.0.0/24"
+    address_prefixes     = ["10.0.0.0/24"]
     name                 = "default"
     security_group = azurerm_network_security_group.hubvnetNSG.id
   }
   subnet {
-    address_prefix     = "10.0.1.0/24"
+    address_prefixes     = ["10.0.1.0/24"]
     name                 = "GatewaySubnet" 
   }
   subnet {
-    address_prefix     = "10.0.2.0/24"
+    address_prefixes     = ["10.0.2.0/24"]
     name                 = "outside"
     security_group =  azurerm_network_security_group.hubasavsshnsg.id
   }
   subnet {
-    address_prefix     = "10.0.3.0/24"
+    address_prefixes     = ["10.0.3.0/24"]
     name                 = "inside" 
     security_group = azurerm_network_security_group.hubasavnsg.id
   }
   subnet {
-    address_prefix     = "10.0.4.0/24"
+    address_prefixes     = ["10.0.4.0/24"]
     name                 = "RouteServerSubnet" 
     
   }
@@ -231,12 +231,12 @@ resource "azurerm_virtual_network" "spoke-vnet" {
   name                = "AZ-spoke-vnet"
   resource_group_name = azurerm_resource_group.RG.name
   subnet {
-    address_prefix     = "10.250.0.0/24"
+    address_prefixes     = ["10.250.0.0/24"]
     name                 = "default"
     security_group = azurerm_network_security_group.spokevnetNSG.id
   }
   subnet {
-    address_prefix     = "10.250.1.0/24"
+    address_prefixes     = ["10.250.1.0/24"]
     name                 = "GatewaySubnet" 
   }
   timeouts {
@@ -324,7 +324,7 @@ resource "azurerm_route_table" "RT" {
   name                          = "RT"
   location                      = azurerm_resource_group.RG.location
   resource_group_name           = azurerm_resource_group.RG.name
-  disable_bgp_route_propagation = false
+  
 
   route {
     name           = "toasav"
